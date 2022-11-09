@@ -5,7 +5,8 @@
 }
 :root {
     --black: #141414;
-    --index: calc(1vw + 1vh);   
+    --index: calc(1vw + 1vh);  
+    --transition: 1.25s cubic-bezier(.2, .5, 0, 1);
 }
 @font-face {
     font-family: arsenal_f, sans-serif;
@@ -20,9 +21,28 @@ body {
     padding: calc(var(--index)*2.75);
 }
 .magic-list__item {
-    cursor: none;
+    /* cursor: none; */
     color: var(--black);
     text-decoration: none;
     display: block;
     line-height: 0.9;
+    padding: calc(var(--index) * 3) calc(var(--index) * 7.5);
+    border-bottom: 1px solid rgb(0 0 0 / .09);
+    counter-increment: my-counter;
+}
+.magic-list__header {
+    width: min-content;
+    font-size: calc(var(--index) * 3);
+    transition: transform var(--transition);
+}
+.magic-list__item::before {
+    content: '(0' counter(my-counter) ')';
+    position: absolute;
+    font-size: calc(var(--index) * .95);
+    margin-left: calc(var(--index) * -2.25);
+    margin-top: calc(var(--index) / 2);
+    letter-spacing: .5px;
+}
+.magic-list__item:hover .magic-list__header {
+    transform: translate3d(calc(var(--index) * -5), 0, 0);
 }
